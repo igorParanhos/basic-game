@@ -1,5 +1,5 @@
 #game {
     border: 1px solid #fff;
-    min-height: 500px;
-    width: 500px;
+    width: 100%;
+    aspect-ratio: 1;
 }
