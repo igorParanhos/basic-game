@@ -44,6 +44,10 @@ h1 {
   text-align: center;
 }
 
+.title {
+  color: #0395f0;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -74,4 +78,12 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.controls {
+  padding: 0.5rem 0;
+}
+.control {
+  height: 5rem;
+  width: 5rem;
 }

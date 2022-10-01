@@ -4,18 +4,29 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UBaasic</title>
+    <title>UBazeek</title>
   </head>
   <body>
     <div id="app">
+      <h1 class="title">UBazeek</h1>
+
+      <div id="result"></div>
+
       <div>
         <canvas id="game"></canvas>
       </div>
-      <div id="result">
 
+      <div class="controls">
+        <button class="control" id="left">⬅</button>
+        <button class="control" id="up">⬆</button>
+        <button class="control" id="down">⬇</button>
+        <button class="control" id="right">➡</button>
       </div>
-      <button id="start">START</button>
-      <button id="stop">STOP</button>
+
+      <div>
+        <button id="start">START</button>
+        <button id="stop">STOP</button>
+      </div>
     </div>
     <script type="module" src="/main.js"></script>
   </body>

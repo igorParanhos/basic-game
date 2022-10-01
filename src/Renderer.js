@@ -2,6 +2,7 @@ import { Enemy } from './Enemy'
 import { Player } from './Player'
 import { Prize } from './Prize'
 import { Canvas2D } from './Canvas2D'
+import { Control } from './Control'
 
 const CANVAS_SIZE = 500
 
@@ -28,13 +29,16 @@ export class Renderer {
             prize,
             ...enemies
         ]
+        this.control = new Control(player)
     }
 
     start = () => {
         this._interval = setInterval(this.tick, 1000 / 60);
+        this.control.start()
     }
     stop = () => {
         clearInterval(this._interval)
+        this.control.stop()
     }
     tick = () => {
         this.canvas.clear()
