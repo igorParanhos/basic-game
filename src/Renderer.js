@@ -12,7 +12,7 @@ const enemies = []
 for (let i = 0; i <= 10; i++) {
     enemies.push(new Enemy(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE))
 }
-window.Player = Player
+
 export class Renderer {
     constructor($element) {
         this._interval = null
@@ -31,7 +31,7 @@ export class Renderer {
     }
 
     start = () => {
-        this._interval = setInterval(this.tick, 1000/60);
+        this._interval = setInterval(this.tick, 1000 / 60);
     }
     stop = () => {
         clearInterval(this._interval)
@@ -45,7 +45,7 @@ export class Renderer {
     renderObjects = () => {
         for (let object of this.objects) {
             const { x, y } = object.getPosition()
-            this.canvas.square(object.color, x, y, 10, 10)
+            this.canvas.square(x, y, 10, object.color)
         }
     }
 

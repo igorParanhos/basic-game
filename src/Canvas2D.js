@@ -6,14 +6,10 @@ export class Canvas2D {
     setColor = (color) => {
         this.ctx.fillStyle = color
     }
-    circle = (color, ...n) => {
-        this.setColor(color)
-        this.ctx.fillCircle(...n)
-    }
-    square = (color, ...n) => {
-        this.setColor(color)
+    square = (x, y, size, color) => {
+        if (color) this.setColor(color)
         const square = new Path2D()
-        square.rect(...n)
+        square.rect(x, y, size, size)
         this.ctx.fill(square)
     }
     clear = () => {
