@@ -45,7 +45,7 @@ h1 {
 }
 
 .title {
-  color: #0395f0;
+  color: #38dcde;
 }
 
 button {
@@ -59,12 +59,9 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none;
 }
 
 @media (prefers-color-scheme: light) {
@@ -92,4 +89,11 @@ button:focus-visible {
   flex: 1;
   font-size: 20px;
   height: 5rem;
+}
+
+.start {
+  border: 1px solid #17b25f;
+}
+.stop {
+  border: 1px solid #b21764;
 }
