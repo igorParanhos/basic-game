@@ -4,9 +4,9 @@ const $left = document.querySelector('#left')
 const $right = document.querySelector('#right')
 
 export class Control {
-    constructor(gameObject) {
+    constructor(gameObject, speed=10) {
         this.gameObject = gameObject;
-        this.speed = 10
+        this.speed = speed
     }
     handleInput = (e) => {
         switch (`${e.key}`) {

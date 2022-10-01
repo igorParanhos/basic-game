@@ -82,8 +82,13 @@ button:focus-visible {
 
 .controls {
   padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
 }
+
 .control {
+  flex: 1;
   height: 5rem;
-  width: 5rem;
 }
