@@ -90,5 +90,6 @@ button:focus-visible {
 
 .control {
   flex: 1;
+  font-size: 20px;
   height: 5rem;
 }

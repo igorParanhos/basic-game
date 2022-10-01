@@ -1,12 +1,15 @@
+import { addPressHoldEventButton, addPressHoldEventKeypress } from "./utils/pressHoldEvent"
+
 const $up = document.querySelector('#up')
 const $down = document.querySelector('#down')
 const $left = document.querySelector('#left')
 const $right = document.querySelector('#right')
 
 export class Control {
-    constructor(gameObject, speed=10) {
+    constructor(gameObject, speed=5) {
         this.gameObject = gameObject;
         this.speed = speed
+        this._cancellationTokens = []
     }
     handleInput = (e) => {
         switch (`${e.key}`) {
@@ -25,22 +28,22 @@ export class Control {
         }
     }
     start = () => {
-        document.addEventListener('keypress', this.handleInput)
-        $up.addEventListener('ke', this.up)
-        $down.addEventListener('click', this.down)
-        $left.addEventListener('click', this.left)
-        $right.addEventListener('click', this.right)
-
-        // press and hold
-
-
+        this.addListeners()
     }
     stop = () => {
-        document.removeEventListener('keypress', this.handleInput)
-        $up.removeEventListener('click', this.up)
-        $down.removeEventListener('click', this.down)
-        $left.removeEventListener('click', this.left)
-        $right.removeEventListener('click', this.right)
+        this.cancelListenerEvents()
+    }
+    addListeners = () => {
+        this._cancellationTokens.push(addPressHoldEventKeypress(document, this.handleInput))
+        this._cancellationTokens.push(addPressHoldEventButton($up, this.up))
+        this._cancellationTokens.push(addPressHoldEventButton($down, this.down))
+        this._cancellationTokens.push(addPressHoldEventButton($left, this.left))
+        this._cancellationTokens.push(addPressHoldEventButton($right, this.right))
+    }
+    cancelListenerEvents = () => {
+        for (let cancelEvent of this._cancellationTokens) {
+            cancelEvent()
+        }
     }
     up = () => {
         this.gameObject.y -= this.speed
