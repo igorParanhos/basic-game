@@ -12,7 +12,8 @@ export class Control {
         this._cancellationTokens = []
     }
     handleInput = (e) => {
-        switch (`${e.key}`) {
+        const key = String(e.key).toLocaleLowerCase()
+        switch (key) {
             case 'w':
                 this.up()
                 break

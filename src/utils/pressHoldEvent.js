@@ -44,11 +44,10 @@ export function addPressHoldEventKeypress(item, fn) {
   item.addEventListener("keyup", notPressingDown, false);
 
   function pressingDown(e) {
+    e.preventDefault();
     if (keyPressed) return
     keyPressed = true
     requestAnimationFrame(timer(e));
-    e.preventDefault();
-    console.log("Pressing!");
   }
 
   function notPressingDown(e) {

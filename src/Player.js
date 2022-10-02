@@ -1,16 +1,7 @@
-const SPEED = 10
+import { GameObject } from "./base/GameObject"
 
-export class Player {
+export class Player extends GameObject {
     constructor() {
-        this.x = 0
-        this.y = 0
-        this.color = '#00ee11'
-    }
-
-    getPosition = () => {
-        return {
-            x: this.x,
-            y: this.y
-        }
+        super(0, 0, '#00ee11')
     }
 }

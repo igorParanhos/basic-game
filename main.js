@@ -3,7 +3,7 @@ import "./styles/game.css";
 
 import { Renderer } from "./src/Renderer";
 
-if ('serviceWorker' in navigator) {
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(registration => {
     console.log('SW Registered!')
     console.log(registration)

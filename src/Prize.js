@@ -1,14 +1,7 @@
-export class Prize {
-    constructor(x, y) {
-        this.x = x
-        this.y = y
-        this.color = '#1141ff'
-    }
+import { GameObject } from "./base/GameObject"
 
-    getPosition = () => {
-        return {
-            x: this.x,
-            y: this.y
-        }
+export class Prize extends GameObject {
+    constructor(x, y) {
+        super(x, y, '#1141ff')
     }
 }
