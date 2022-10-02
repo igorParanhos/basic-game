@@ -4,7 +4,7 @@ import "./styles/game.css";
 import { Game } from "./src/Game";
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(registration => {
+  navigator.serviceWorker.register('/config/sw.js').then(registration => {
     console.log('SW Registered!')
     console.log(registration)
   }).catch(error => {

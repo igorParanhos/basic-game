@@ -1,8 +1,15 @@
+function wipeCache() {
+    caches.keys().then((names) => {
+        for (let name of names)
+            caches.delete(name);
+    });
+}
+
 self.addEventListener('install', e => {
     console.log('Installing')
     e.waitUntil(
         caches.open('static').then(cache => {
-            return cache.addAll(['./assets', './'])
+            return cache.addAll(['/assets', '/images'])
         })
     )
 })
