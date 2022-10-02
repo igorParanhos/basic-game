@@ -7,16 +7,6 @@ function wipeCache() {
 const images = [
   "/images/android-chrome-192x192.png",
   "/images/favicon-32x32.png",
-  "/images/mstile-310x150.png",
-  "/images/screenshot1.png",
-  "/images/android-chrome-512x512.png",
-  "/images/favicon.ico",
-  "/images/mstile-310x310.png",
-  "/images/apple-touch-icon.png",
-  "/images/mstile-144x144.png",
-  "/images/mstile-70x70.png",
-  "/images/favicon-16x16.png",
-  "/images/mstile-150x150.png",
   "/images/safari-pinned-tab.svg",
 ];
 const config = [
