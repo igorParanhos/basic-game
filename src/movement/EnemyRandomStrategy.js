@@ -1,12 +1,12 @@
-const MAX_STEPS = 5
+const SPEED = 5
 
-export class Enemy {
+export class EnemyRandomStrategy {
     constructor(x, y) {
         this.x = x
         this.y = y
-        this.color = '#ff1111'
     }
-    getPosition = () => {
+
+    getNextPosition = () => {
         const steps = this.nextSteps()
         const direction = this.nextDirection()
 
@@ -22,6 +22,6 @@ export class Enemy {
         return Math.random() * 2 * Math.PI
     }
     nextSteps = () => {
-        return Math.random() * MAX_STEPS
+        return Math.random() * SPEED
     }
 }

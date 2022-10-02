@@ -1,8 +1,8 @@
-import { Enemy } from "./Enemy";
-import { Player } from "./Player";
-import { Prize } from "./Prize";
+import { Enemy } from "./objects/Enemy";
+import { Player } from "./objects/Player";
+import { Prize } from "./objects/Prize";
 import { Canvas2D } from "./Canvas2D";
-import { Control } from "./Control";
+import { Level } from './levels/Level'
 
 const CANVAS_SIZE = 500;
 
@@ -22,14 +22,16 @@ export class Renderer {
   }
 
   start = () => {
-    this.createLevel();
+    this.currentLevel = new Level()
+    this.currentLevel.initialize()
+
     this._interval = requestAnimationFrame(this.tick);
-    this.control.start();
+    this.currentLevel.start();
     this.status = "playing";
   };
   stop = () => {
     cancelAnimationFrame(this._interval);
-    this.control.stop();
+    this.currentLevel.stop();
     this.status = "stopped";
   };
   tick = () => {
@@ -41,34 +43,18 @@ export class Renderer {
       this._interval = requestAnimationFrame(this.tick);
   };
 
-  createLevel = () => {
-    const player = new Player();
-    const prize = new Prize(
-      Math.random() * CANVAS_SIZE,
-      Math.random() * CANVAS_SIZE
-    );
-    const enemies = [];
-    for (let i = 0; i <= 10; i++) {
-      enemies.push(
-        new Enemy(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE)
-      );
-    }
-
-    this.objects = [player, prize, ...enemies];
-    this.control = new Control(player);
-  };
-
   renderObjects = () => {
-    for (let object of this.objects) {
+    for (let object of this.currentLevel.getObjects()) {
       const { x, y } = object.getPosition();
       this.canvas.square(x, y, 10, object.color);
     }
   };
 
   checkCollision = () => {
-    const [player] = this.objects;
-    const { x, y } = player;
-    for (let object of this.objects) {
+    const objects = this.currentLevel.getObjects();
+    const { x, y } = this.currentLevel.player;
+
+    for (let object of objects) {
       const { x: objectX, y: objectY } = object;
       if (
         (x > objectX && x < objectX + 10 && y > objectY && y < objectY + 10) ||
