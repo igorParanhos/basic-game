@@ -8,7 +8,7 @@ self.addEventListener("install", (e) => {
   console.log("Installing");
   e.waitUntil(
     caches.open("static").then((cache) => {
-      return cache.addAll(["./assets", './config']);
+    //   return cache.addAll(["./assets", './config']);
     })
   );
 });
