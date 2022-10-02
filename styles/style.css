@@ -101,3 +101,13 @@ button:disabled {
 .stop {
   border: 1px solid #b21764;
 }
+
+#up div {
+  transform: rotate(-90deg);
+}
+#down div {
+  transform: rotate(90deg);
+}
+#left div {
+  transform: rotate(180deg);
+}
