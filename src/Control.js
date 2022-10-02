@@ -47,15 +47,15 @@ export class Control {
         }
     }
     up = () => {
-        this.gameObject.y -= this.speed
+        this.gameObject.setPosition(this.gameObject.x, this.gameObject.y - this.speed)
     }
     down = () => {
-        this.gameObject.y += this.speed
+        this.gameObject.setPosition(this.gameObject.x, this.gameObject.y + this.speed)
     }
     left = () => {
-        this.gameObject.x -= this.speed
+        this.gameObject.setPosition(this.gameObject.x - this.speed, this.gameObject.y)
     }
     right = () => {
-        this.gameObject.x += this.speed
+        this.gameObject.setPosition(this.gameObject.x + this.speed, this.gameObject.y)
     }
 }
