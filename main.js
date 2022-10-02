@@ -1,7 +1,7 @@
 import "./styles/style.css";
 import "./styles/game.css";
 
-import { Renderer } from "./src/Renderer";
+import { Game } from "./src/Game";
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(registration => {
@@ -15,20 +15,28 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
 
 const main = () => {
   const $canvas = document.querySelector("#game");
-  const renderer = new Renderer($canvas);
-
   const $start = document.querySelector("#start");
   const $stop = document.querySelector("#stop");
-  $start.addEventListener("click", () => {
+  const $result = document.querySelector('#result')
+
+  const game = new Game({element: $canvas})
+
+
+
+  game.initialize();
+  game.gameInfoProvider.status.onStart(() => {
     $start.disabled = true;
     $stop.disabled = false;
-    renderer.start();
-  });
-  $stop.addEventListener("click", () => {
+    $result.classList.remove('fail', 'success', 'animate')
+  })
+
+  game.gameInfoProvider.status.onStop(() => {
     $start.disabled = false;
     $stop.disabled = true;
-    renderer.stop();
-  });
+  })
+
+  $start.addEventListener("click", game.start);
+  $stop.addEventListener("click", game.stop);
 };
 
 window.addEventListener("DOMContentLoaded", main);

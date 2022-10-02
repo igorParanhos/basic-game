@@ -1,7 +1,6 @@
 export function addPressHoldEventButton(item, fn) {
   let timerID;
 
-  // Listening for the mouse and touch events
   item.addEventListener("mousedown", pressingDown, false);
   item.addEventListener("mouseup", notPressingDown, false);
   item.addEventListener("mouseleave", notPressingDown, false);
@@ -12,7 +11,6 @@ export function addPressHoldEventButton(item, fn) {
   function pressingDown(e) {
     requestAnimationFrame(timer);
     e.preventDefault();
-    console.log("Pressing!");
   }
 
   function notPressingDown(e) {
@@ -36,29 +34,31 @@ export function addPressHoldEventButton(item, fn) {
 }
 
 export function addPressHoldEventKeypress(item, fn) {
-  let timerID;
-  let keyPressed = false
+  let timerIDs = {};
+  let keysPressed = []
+  const allowedKeys = 'wasd'
 
-  // Listening for the mouse and touch events
   item.addEventListener("keydown", pressingDown, false);
   item.addEventListener("keyup", notPressingDown, false);
 
   function pressingDown(e) {
+    if (!allowedKeys.includes(e.key)) return
     e.preventDefault();
-    if (keyPressed) return
-    keyPressed = true
+    if (keysPressed.includes(e.key)) return
+
+    keysPressed.push(e.key)
     requestAnimationFrame(timer(e));
   }
 
   function notPressingDown(e) {
-    keyPressed = false
-    cancelAnimationFrame(timerID);
+    keysPressed = keysPressed.filter(k => e.key !== k)
+    cancelAnimationFrame(timerIDs[e.key]);
   }
 
   function timer(e) {
     return () => {
       fn(e)
-      timerID = requestAnimationFrame(timer(e));
+      timerIDs[e.key] = requestAnimationFrame(timer(e));
     }
   }
 
