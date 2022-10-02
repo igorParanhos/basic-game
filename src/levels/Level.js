@@ -30,6 +30,7 @@ export class Level {
     this.initializeEnemies();
   };
   initializeEnemies = () => {
+    this.enemies = []
     for (let i = 0; i <= this.settings.enemyAmount; i++) {
       this.enemies.push(
         new Enemy(
