@@ -46,7 +46,7 @@ h1 {
 }
 
 .title {
-  color: #38dcde;
+  color: #00ff7b;
 }
 
 button {
@@ -137,5 +137,47 @@ button:disabled {
   100% {
     opacity: 1;
     transform: translate(0%, 0%) scale(1);
+  }
+}
+
+.splash {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+
+  position: fixed;
+  background-color: #00ff8c;
+  opacity: 0;
+  animation: splash 2s ease-in;
+
+  font-size: 4rem;
+}
+
+.splash h2 {
+  width: 100%;
+  text-align: center;
+}
+
+@keyframes splashtitle {
+  0% {
+    opacity: 0;
+
+  }
+}
+
+@keyframes splash {
+  0% {
+    display: flex;
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: flex;
   }
 }

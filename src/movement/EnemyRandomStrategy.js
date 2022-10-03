@@ -1,4 +1,4 @@
-const SPEED = 5;
+const SPEED = 2;
 
 export class EnemyRandomStrategy {
   constructor() {}
@@ -19,6 +19,6 @@ export class EnemyRandomStrategy {
     return Math.random() * 2 * Math.PI;
   };
   nextSteps = () => {
-    return Math.random() * SPEED;
+    return SPEED;
   };
 }

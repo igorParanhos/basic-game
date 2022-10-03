@@ -6,7 +6,7 @@ const $left = document.querySelector('#left')
 const $right = document.querySelector('#right')
 
 export class Control {
-    constructor(gameObject, speed=5) {
+    constructor(gameObject, speed=2) {
         this.gameObject = gameObject;
         this.speed = speed
         this._cancellationTokens = []

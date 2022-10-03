@@ -2,7 +2,6 @@ import { Enemy } from "../objects/Enemy";
 import { Player } from "../objects/Player";
 import { Prize } from "../objects/Prize";
 import { Canvas2D } from "../Canvas2D";
-// import { Level } from './levels/Level'
 
 const CANVAS_SIZE = 500;
 
@@ -50,11 +49,10 @@ export class Renderer {
     for (let object of objects) {
       const { x: objectX, y: objectY } = object;
       if (
-        (x > objectX && x < objectX + 10 && y > objectY && y < objectY + 10) ||
-        (x + 10 > objectX &&
-          x + 10 < objectX + 10 &&
-          y + 10 > objectY &&
-          y < objectY + 10)
+        x < objectX + 10 &&
+        x + 10 > objectX &&
+        y < objectY + 10 &&
+        10 + y > objectY
       ) {
         if (object instanceof Player) continue;
         if (object instanceof Enemy) {

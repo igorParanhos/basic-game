@@ -31,11 +31,11 @@ export class Level {
   };
   initializeEnemies = () => {
     this.enemies = []
-    for (let i = 0; i <= this.settings.enemyAmount; i++) {
+    for (let i = 0; i < this.settings.enemyAmount; i++) {
       this.enemies.push(
         new Enemy(
-          Math.random() * CANVAS_SIZE,
-          Math.random() * CANVAS_SIZE,
+          Math.random() * (this.settings.canvasSize - 10),
+          Math.random() * (this.settings.canvasSize - 10),
           this.enemyMovementStrategy
         )
       );
@@ -47,8 +47,8 @@ export class Level {
   };
   initializePrize = () => {
     this.prize = new Prize(
-      Math.random() * this.settings.canvasSize,
-      Math.random() * this.settings.canvasSize
+      Math.random() * (this.settings.canvasSize - 10),
+      Math.random() * (this.settings.canvasSize - 10)
     );
   };
   getObjects = () => {

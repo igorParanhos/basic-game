@@ -7,7 +7,7 @@
   "description": "Just a basic game",
   "scope": "/",
   "background_color": "#242424",
-  "theme_color": "#747bff",
+  "theme_color": "#00ff7b",
   "icons": [
     {
       "src": "/images/android-chrome-192x192.png",
