@@ -2,6 +2,7 @@ import { Enemy } from "./objects/Enemy";
 import { Player } from "./objects/Player";
 import { Prize } from "./objects/Prize";
 import { Level } from "./levels/Level";
+import { Level1 } from "./levels/Level1";
 import { Renderer } from "./engine/Renderer";
 import Observer from "./utils/Observer";
 
@@ -36,6 +37,8 @@ class Status extends Observer {
   };
 }
 
+
+
 export class GameInfoProvider {
   constructor() {
     this.status = new Status();
@@ -46,12 +49,30 @@ export class GameInfoProvider {
 export class Game {
   constructor({ element }) {
     this.gameInfoProvider = new GameInfoProvider();
-    this.gameInfoProvider.currentLevel = new Level();
     this.renderer = new Renderer(element, this.gameInfoProvider);
     this._animationFrame = null
+    this.level = [
+      Level,
+      Level1,
+    ]
+    this.gameInfoProvider.currentLevel = new Level();
+    this.currentLevel = 0
   }
   initialize = () => {
   };
+  nextLevel = () => {
+    if (this.currentLevel == this.level.length - 1) {
+      this.resetLevel()
+    }
+    else {
+      this.currentLevel++
+      this.gameInfoProvider.currentLevel = new this.level[this.currentLevel]()
+    }
+  }
+  resetLevel = () => {
+    this.currentLevel = 0
+    this.gameInfoProvider.currentLevel = new this.level[this.currentLevel]()
+  }
   start = () => {
     this.gameInfoProvider.currentLevel.initialize();
     this.gameInfoProvider.currentLevel.start();
@@ -83,11 +104,13 @@ export class Game {
     this.gameInfoProvider.status.stop()
     $result.classList.add('animate', 'fail')
     $result.innerHTML = "You lost";
+    this.resetLevel()
   };
   handlePlayerPrizeCollision = () => {
     this.gameInfoProvider.status.stop()
     $result.classList.add('animate', 'success')
     $result.innerHTML = "You won";
+    this.nextLevel();
   };
   checkCollision = () => {
     const objects = this.gameInfoProvider.currentLevel.getObjects();

@@ -9,8 +9,10 @@ const CANVAS_SIZE = 500;
 export class Level {
   constructor() {
     this.settings = {
-      enemyAmount: 30,
+      enemyAmount: 20,
+      playerSpeed: 3,
       canvasSize: CANVAS_SIZE,
+      enemySpeed: 2,
     };
     this.player = null;
     this.prize = null;
@@ -36,14 +38,15 @@ export class Level {
         new Enemy(
           Math.random() * (this.settings.canvasSize - 10),
           Math.random() * (this.settings.canvasSize - 10),
-          this.enemyMovementStrategy
+          this.enemyMovementStrategy,
+          this.settings.enemySpeed
         )
       );
     }
   };
   initializePlayer = () => {
     this.player = new Player();
-    this.control = new Control(this.player);
+    this.control = new Control(this.player, this.settings.playerSpeed);
   };
   initializePrize = () => {
     this.prize = new Prize(

@@ -1,8 +1,9 @@
 const SPEED = 2;
 
 export class EnemyCircularStrategy {
-    constructor() {
+    constructor(speed=2) {
         this.previousDirection = null
+        this.speed = speed
     }
 
     getNextPosition = (x, y) => {
@@ -27,6 +28,6 @@ export class EnemyCircularStrategy {
         return Math.random() * 2 * Math.PI;
     };
     nextSteps = () => {
-        return SPEED;
+        return this.speed;
     };
 }
