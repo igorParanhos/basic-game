@@ -37,7 +37,29 @@ class Status extends Observer {
   };
 }
 
+export class UiController {
+  constructor() {}
 
+  setResult = (status) => {
+    let message, className
+    switch (status) {
+      case 'fail':
+        className = status
+        message = 'YOU FAILED!'
+        break;
+      case 'success':
+        className = status
+        message = 'YOU WON!'
+       break
+    }
+    $result.classList.add('animate', className)
+    $result.children[0].innerHTML = message;
+  }
+  setLevel = (level) => {
+    const $level = document.querySelector('#level')
+    $level.innerHTML = `Level: ${level}`
+  }
+}
 
 export class GameInfoProvider {
   constructor() {
@@ -55,23 +77,26 @@ export class Game {
       Level,
       Level1,
     ]
-    this.gameInfoProvider.currentLevel = new Level();
-    this.currentLevel = 0
+    this.uiController = new UiController()
   }
   initialize = () => {
+    this.setLevel(0)
   };
+  setLevel = (levelIndex) => {
+    this.currentLevel = levelIndex
+    this.gameInfoProvider.currentLevel = new this.level[this.currentLevel]()
+    this.uiController.setLevel(levelIndex)
+  }
   nextLevel = () => {
     if (this.currentLevel == this.level.length - 1) {
       this.resetLevel()
     }
     else {
-      this.currentLevel++
-      this.gameInfoProvider.currentLevel = new this.level[this.currentLevel]()
+      this.setLevel(this.currentLevel + 1)
     }
   }
   resetLevel = () => {
-    this.currentLevel = 0
-    this.gameInfoProvider.currentLevel = new this.level[this.currentLevel]()
+    this.setLevel(0)
   }
   start = () => {
     this.gameInfoProvider.currentLevel.initialize();
@@ -102,14 +127,12 @@ export class Game {
 
   handlePlayerEnemyCollision = () => {
     this.gameInfoProvider.status.stop()
-    $result.classList.add('animate', 'fail')
-    $result.innerHTML = "You lost";
+    this.uiController.setResult('fail')
     this.resetLevel()
   };
   handlePlayerPrizeCollision = () => {
     this.gameInfoProvider.status.stop()
-    $result.classList.add('animate', 'success')
-    $result.innerHTML = "You won";
+    this.uiController.setResult('success')
     this.nextLevel();
   };
   checkCollision = () => {

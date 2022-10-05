@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -113,15 +116,27 @@ button:disabled {
   transform: rotate(180deg);
 }
 
+.game-container {
+  position: relative;
+}
+
 .result {
-  font-size: 2rem;
-  padding: 1rem;
+  font-size: 4rem;
   font-weight: bold;
-  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #1a1a1a;
+  top: 0;
+  left: 0;
+  display: none;
 }
 .animate {
-  opacity: 1;
-  animation: .2s appear ease-in-out;
+  display: flex;
 }
 .result.success {
   color: #00ff8c;
@@ -129,14 +144,28 @@ button:disabled {
 .result.fail {
   color: #ff0066;
 }
+.result span {
+  display: block;
+  opacity: 0;
+}
+.animate span {
+  opacity: 1;
+  animation: .5s appear ease-in-out;
+}
 @keyframes appear {
   0% {
     opacity: 0;
     transform: translate(0%, -100%) scale(.1);
   }
-  100% {
+  50% {
     opacity: 1;
     transform: translate(0%, 0%) scale(1);
+  }
+  75% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 
