@@ -144,6 +144,9 @@ button:disabled {
 .result.fail {
   color: #ff0066;
 }
+.result.info {
+  color: #0062ff;
+}
 .result span {
   display: block;
   opacity: 0;
@@ -193,7 +196,6 @@ button:disabled {
 @keyframes splashtitle {
   0% {
     opacity: 0;
-
   }
 }
 

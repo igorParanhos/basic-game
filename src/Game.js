@@ -3,6 +3,7 @@ import { Player } from "./objects/Player";
 import { Prize } from "./objects/Prize";
 import { Level } from "./levels/Level";
 import { Level1 } from "./levels/Level1";
+import { Level2 } from "./levels/Level2";
 import { Renderer } from "./engine/Renderer";
 import Observer from "./utils/Observer";
 
@@ -51,7 +52,12 @@ export class UiController {
         className = status
         message = 'YOU WON!'
        break
+      case 'next-level':
+        className = 'info'
+        message = 'NEXT LEVEL!'
+        break
     }
+    $result.classList.remove('animate', 'info', 'success', 'fail')
     $result.classList.add('animate', className)
     $result.children[0].innerHTML = message;
   }
@@ -73,9 +79,10 @@ export class Game {
     this.gameInfoProvider = new GameInfoProvider();
     this.renderer = new Renderer(element, this.gameInfoProvider);
     this._animationFrame = null
-    this.level = [
+    this.levels = [
       Level,
       Level1,
+      Level2
     ]
     this.uiController = new UiController()
   }
@@ -84,11 +91,11 @@ export class Game {
   };
   setLevel = (levelIndex) => {
     this.currentLevel = levelIndex
-    this.gameInfoProvider.currentLevel = new this.level[this.currentLevel]()
+    this.gameInfoProvider.currentLevel = new this.levels[this.currentLevel]()
     this.uiController.setLevel(levelIndex)
   }
   nextLevel = () => {
-    if (this.currentLevel == this.level.length - 1) {
+    if (this.currentLevel == this.levels.length - 1) {
       this.resetLevel()
     }
     else {
@@ -132,7 +139,8 @@ export class Game {
   };
   handlePlayerPrizeCollision = () => {
     this.gameInfoProvider.status.stop()
-    this.uiController.setResult('success')
+    if (this.currentLevel === this.levels.length - 1) this.uiController.setResult('success')
+    else this.uiController.setResult('next-level')
     this.nextLevel();
   };
   checkCollision = () => {

@@ -8,7 +8,11 @@ export class Level1 extends Level {
             ...this.settings,
             enemyAmount: 25,
             playerSpeed: 3,
-            enemySpeed: 1,
+            enemyMovementSettings: {
+                speed: 2,
+                rotation: .1,
+                randomOrientation: false
+            }
         };
         this.enemyMovementStrategy = EnemyCircularStrategy
     }

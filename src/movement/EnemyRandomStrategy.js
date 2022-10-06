@@ -1,5 +1,5 @@
 export class EnemyRandomStrategy {
-  constructor(speed=2) {
+  constructor({speed=2}) {
     this._speed = speed
   }
 

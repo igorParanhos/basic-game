@@ -1,10 +1,10 @@
 export class GameObject {
-  constructor(x = 0, y = 0, color = "#999999", movementStrategy=null, speed=2) {
+  constructor(x = 0, y = 0, color = "#999999", movementStrategy=null, movementSettings={speed: 2}) {
     this.x = x;
     this.y = y;
     this.color = color;
     if (movementStrategy) {
-      this.movementStrategy = new movementStrategy(speed)
+      this.movementStrategy = new movementStrategy(movementSettings)
     }
   }
   setPosition = (x, y) => {

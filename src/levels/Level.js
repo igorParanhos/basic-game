@@ -12,7 +12,7 @@ export class Level {
       enemyAmount: 20,
       playerSpeed: 3,
       canvasSize: CANVAS_SIZE,
-      enemySpeed: 2,
+      enemyMovementSettings: {speed: 2},
     };
     this.player = null;
     this.prize = null;
@@ -39,7 +39,7 @@ export class Level {
           Math.random() * (this.settings.canvasSize - 10),
           Math.random() * (this.settings.canvasSize - 10),
           this.enemyMovementStrategy,
-          this.settings.enemySpeed
+          this.settings.enemyMovementSettings
         )
       );
     }

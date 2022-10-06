@@ -1,11 +1,19 @@
+import { EnemyCircularStrategy } from "../movement/EnemyCircularStrategy";
 import { Level } from "./Level";
 
 export class Level2 extends Level {
     constructor() {
-        super();
+        super()
         this.settings = {
+            ...this.settings,
             enemyAmount: 30,
-            canvasSize: CANVAS_SIZE,
+            playerSpeed: 3,
+            enemyMovementSettings: {
+                speed: 3,
+                rotation: .2,
+                randomOrientation: true
+            }
         };
+        this.enemyMovementStrategy = EnemyCircularStrategy
     }
 }
