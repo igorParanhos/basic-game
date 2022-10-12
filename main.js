@@ -1,5 +1,5 @@
-import './styles/style.css';
-import './styles/game.css';
+// import './styles/style.css';
+// import './styles/game.css';
 
 import { Game } from './src/Game';
 

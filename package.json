@@ -9,9 +9,13 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^3.1.0",
     "eslint": "^8.25.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "sass": "^1.55.0",
+    "sass-rem": "^3.0.0"
   }
 }
