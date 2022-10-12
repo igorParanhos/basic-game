@@ -1,7 +1,7 @@
 // import './styles/style.css';
 // import './styles/game.css';
 
-import { Game } from './src/Game';
+import { Game } from './src/core/Game';
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   navigator.serviceWorker

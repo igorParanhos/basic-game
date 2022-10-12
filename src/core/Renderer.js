@@ -1,4 +1,4 @@
-import { Canvas2D } from '../Canvas2D';
+import { Canvas2D } from './Canvas2D';
 
 const CANVAS_SIZE = 500;
 

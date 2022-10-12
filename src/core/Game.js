@@ -1,45 +1,17 @@
-import { Enemy } from './objects/Enemy';
-import { Player } from './objects/Player';
-import { Prize } from './objects/Prize';
-import { Level } from './levels/Level';
-import { Level1 } from './levels/Level1';
-import { Level2 } from './levels/Level2';
-import { Renderer } from './engine/Renderer';
-import Observer from './utils/Observer';
+import { Enemy } from '../objects/Enemy';
+import { Player } from '../objects/Player';
+import { Prize } from '../objects/Prize';
+import { Level0 } from '../levels/Level0';
+import { Level1 } from '../levels/Level1';
+import { Level2 } from '../levels/Level2';
+import { Renderer } from './Renderer';
+import { GameInfoProvider } from './gameInfo';
 
 const $result = document.querySelector('#result');
 
-class Status extends Observer {
-  constructor() {
-    super();
-    this.value = '';
-  }
-  _eventTypes = {
-    CHANGE: 'CHANGE',
-    START: 'START',
-    STOP: 'STOP',
-  };
-  onChange = this._on(this._eventTypes.CHANGE);
-  emitChange = this._emit(this._eventTypes.CHANGE);
-  onStart = this._on(this._eventTypes.START);
-  emitStart = this._emit(this._eventTypes.START);
-  onStop = this._on(this._eventTypes.STOP);
-  emitStop = this._emit(this._eventTypes.STOP);
-
-  start = () => {
-    this.value = 'playing';
-    this.emitChange(this.value);
-    this.emitStart(this.value);
-  };
-  stop = () => {
-    this.value = 'stop';
-    this.emitChange(this.value);
-    this.emitStop(this.value);
-  };
-}
 
 export class UiController {
-  constructor() {}
+  constructor() { }
 
   setResult = (status) => {
     let message, className;
@@ -67,19 +39,12 @@ export class UiController {
   };
 }
 
-export class GameInfoProvider {
-  constructor() {
-    this.status = new Status();
-    this.currentLevel = null;
-  }
-}
-
 export class Game {
   constructor({ element }) {
     this.gameInfoProvider = new GameInfoProvider();
     this.renderer = new Renderer(element, this.gameInfoProvider);
     this._animationFrame = null;
-    this.levels = [Level, Level1, Level2];
+    this.levels = [Level0, Level1, Level2];
     this.uiController = new UiController();
   }
   initialize = () => {

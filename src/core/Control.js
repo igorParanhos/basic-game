@@ -1,4 +1,4 @@
-import { addPressHoldEventButton, addPressHoldEventKeypress } from './utils/pressHoldEvent';
+import { addPressHoldEventButton, addPressHoldEventKeypress } from '../utils/pressHoldEvent';
 
 const $up = document.querySelector('#up');
 const $down = document.querySelector('#down');

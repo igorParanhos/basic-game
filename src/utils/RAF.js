@@ -5,30 +5,24 @@ class RAF {
     this.render();
   }
 
-  subscribe(name, callback) {
+  subscribe = (name, callback) => {
     this.callbacks.push({
       name: name,
       callback: callback,
     });
   }
 
-  unsubscribe(name) {
+  unsubscribe = (name) => {
     this.callbacks.forEach((item, i) => {
       if (item.name == name) this.callbacks.splice(i, i + 1);
     });
   }
 
-  render() {
+  render = () => {
     requestAnimationFrame(this.render);
     this.callbacks.forEach((item) => {
-      item.callback();
+      item.callback()
     });
-  }
-
-  bind() {
-    this.subscribe = this.subscribe.bind(this);
-    this.unsubscribe = this.unsubscribe.bind(this);
-    this.render = this.render.bind(this);
   }
 }
 

@@ -1,1 +1,0 @@
-let gameInfoProvider = null;
