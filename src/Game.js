@@ -1,23 +1,23 @@
-import { Enemy } from "./objects/Enemy";
-import { Player } from "./objects/Player";
-import { Prize } from "./objects/Prize";
-import { Level } from "./levels/Level";
-import { Level1 } from "./levels/Level1";
-import { Level2 } from "./levels/Level2";
-import { Renderer } from "./engine/Renderer";
-import Observer from "./utils/Observer";
+import { Enemy } from './objects/Enemy';
+import { Player } from './objects/Player';
+import { Prize } from './objects/Prize';
+import { Level } from './levels/Level';
+import { Level1 } from './levels/Level1';
+import { Level2 } from './levels/Level2';
+import { Renderer } from './engine/Renderer';
+import Observer from './utils/Observer';
 
-const $result = document.querySelector("#result");
+const $result = document.querySelector('#result');
 
 class Status extends Observer {
   constructor() {
     super();
-    this.value = "";
+    this.value = '';
   }
   _eventTypes = {
-    CHANGE: "CHANGE",
-    START: "START",
-    STOP: "STOP",
+    CHANGE: 'CHANGE',
+    START: 'START',
+    STOP: 'STOP',
   };
   onChange = this._on(this._eventTypes.CHANGE);
   emitChange = this._emit(this._eventTypes.CHANGE);
@@ -27,12 +27,12 @@ class Status extends Observer {
   emitStop = this._emit(this._eventTypes.STOP);
 
   start = () => {
-    this.value = "playing";
+    this.value = 'playing';
     this.emitChange(this.value);
     this.emitStart(this.value);
   };
   stop = () => {
-    this.value = "stop";
+    this.value = 'stop';
     this.emitChange(this.value);
     this.emitStop(this.value);
   };
@@ -42,29 +42,29 @@ export class UiController {
   constructor() {}
 
   setResult = (status) => {
-    let message, className
+    let message, className;
     switch (status) {
       case 'fail':
-        className = status
-        message = 'YOU FAILED!'
+        className = status;
+        message = 'YOU FAILED!';
         break;
       case 'success':
-        className = status
-        message = 'YOU WON!'
-       break
+        className = status;
+        message = 'YOU WON!';
+        break;
       case 'next-level':
-        className = 'info'
-        message = 'NEXT LEVEL!'
-        break
+        className = 'info';
+        message = 'NEXT LEVEL!';
+        break;
     }
-    $result.classList.remove('animate', 'info', 'success', 'fail')
-    $result.classList.add('animate', className)
+    $result.classList.remove('animate', 'info', 'success', 'fail');
+    $result.classList.add('animate', className);
     $result.children[0].innerHTML = message;
-  }
+  };
   setLevel = (level) => {
-    const $level = document.querySelector('#level')
-    $level.innerHTML = `Level: ${level}`
-  }
+    const $level = document.querySelector('#level');
+    $level.innerHTML = `Level: ${level}`;
+  };
 }
 
 export class GameInfoProvider {
@@ -78,44 +78,39 @@ export class Game {
   constructor({ element }) {
     this.gameInfoProvider = new GameInfoProvider();
     this.renderer = new Renderer(element, this.gameInfoProvider);
-    this._animationFrame = null
-    this.levels = [
-      Level,
-      Level1,
-      Level2
-    ]
-    this.uiController = new UiController()
+    this._animationFrame = null;
+    this.levels = [Level, Level1, Level2];
+    this.uiController = new UiController();
   }
   initialize = () => {
-    this.setLevel(0)
+    this.setLevel(0);
   };
   setLevel = (levelIndex) => {
-    this.currentLevel = levelIndex
-    this.gameInfoProvider.currentLevel = new this.levels[this.currentLevel]()
-    this.uiController.setLevel(levelIndex)
-  }
+    this.currentLevel = levelIndex;
+    this.gameInfoProvider.currentLevel = new this.levels[this.currentLevel]();
+    this.uiController.setLevel(levelIndex);
+  };
   nextLevel = () => {
     if (this.currentLevel == this.levels.length - 1) {
-      this.resetLevel()
+      this.resetLevel();
+    } else {
+      this.setLevel(this.currentLevel + 1);
     }
-    else {
-      this.setLevel(this.currentLevel + 1)
-    }
-  }
+  };
   resetLevel = () => {
-    this.setLevel(0)
-  }
+    this.setLevel(0);
+  };
   start = () => {
     this.gameInfoProvider.currentLevel.initialize();
     this.gameInfoProvider.currentLevel.start();
     this.gameInfoProvider.status.start();
-    this.startRenderer()
+    this.startRenderer();
   };
 
   stop = () => {
     this.gameInfoProvider.currentLevel.stop();
     this.gameInfoProvider.status.stop();
-    this.stopRenderer()
+    this.stopRenderer();
   };
 
   startRenderer = () => {
@@ -128,19 +123,18 @@ export class Game {
     this.renderer.renderObjects();
     this.checkCollision();
 
-    if (this.gameInfoProvider.status.value == "playing")
-      this._animationFrame = requestAnimationFrame(this.tick);
+    if (this.gameInfoProvider.status.value == 'playing') this._animationFrame = requestAnimationFrame(this.tick);
   };
 
   handlePlayerEnemyCollision = () => {
-    this.gameInfoProvider.status.stop()
-    this.uiController.setResult('fail')
-    this.resetLevel()
+    this.gameInfoProvider.status.stop();
+    this.uiController.setResult('fail');
+    this.resetLevel();
   };
   handlePlayerPrizeCollision = () => {
-    this.gameInfoProvider.status.stop()
-    if (this.currentLevel === this.levels.length - 1) this.uiController.setResult('success')
-    else this.uiController.setResult('next-level')
+    this.gameInfoProvider.status.stop();
+    if (this.currentLevel === this.levels.length - 1) this.uiController.setResult('success');
+    else this.uiController.setResult('next-level');
     this.nextLevel();
   };
   checkCollision = () => {
@@ -149,12 +143,7 @@ export class Game {
 
     for (let object of objects) {
       const { x: objectX, y: objectY } = object;
-      if (
-        x < objectX + 10 &&
-        x + 10 > objectX &&
-        y < objectY + 10 &&
-        10 + y > objectY
-      ) {
+      if (x < objectX + 10 && x + 10 > objectX && y < objectY + 10 && 10 + y > objectY) {
         if (object instanceof Player) continue;
         if (object instanceof Enemy) {
           this.handlePlayerEnemyCollision();

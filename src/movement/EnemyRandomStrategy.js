@@ -1,6 +1,6 @@
 export class EnemyRandomStrategy {
-  constructor({speed=2}) {
-    this._speed = speed
+  constructor({ speed = 2 }) {
+    this._speed = speed;
   }
 
   getNextPosition = (x, y) => {

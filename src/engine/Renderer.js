@@ -1,18 +1,17 @@
-import { Canvas2D } from "../Canvas2D";
+import { Canvas2D } from '../Canvas2D';
 
 const CANVAS_SIZE = 500;
-
 
 export class Renderer {
   constructor($element, gameInfoProvider) {
     this.$element = $element;
-    this.ctx = $element.getContext("2d");
+    this.ctx = $element.getContext('2d');
     this.canvas = new Canvas2D(this.ctx, CANVAS_SIZE);
 
     this.ctx.canvas.height = CANVAS_SIZE;
     this.ctx.canvas.width = CANVAS_SIZE;
 
-    this.gameInfoProvider = gameInfoProvider
+    this.gameInfoProvider = gameInfoProvider;
   }
 
   renderObjects = () => {

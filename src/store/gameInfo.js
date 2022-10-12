@@ -1,2 +1,1 @@
-let gameInfoProvider = null
-
+let gameInfoProvider = null;

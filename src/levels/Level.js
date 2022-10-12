@@ -1,8 +1,8 @@
-import { Enemy } from "../objects/Enemy";
-import { Player } from "../objects/Player";
-import { Prize } from "../objects/Prize";
-import { Control } from "../Control";
-import { EnemyRandomStrategy } from "../movement/EnemyRandomStrategy";
+import { Enemy } from '../objects/Enemy';
+import { Player } from '../objects/Player';
+import { Prize } from '../objects/Prize';
+import { Control } from '../Control';
+import { EnemyRandomStrategy } from '../movement/EnemyRandomStrategy';
 
 const CANVAS_SIZE = 500;
 
@@ -12,7 +12,7 @@ export class Level {
       enemyAmount: 20,
       playerSpeed: 3,
       canvasSize: CANVAS_SIZE,
-      enemyMovementSettings: {speed: 2},
+      enemyMovementSettings: { speed: 2 },
     };
     this.player = null;
     this.prize = null;
@@ -32,7 +32,7 @@ export class Level {
     this.initializeEnemies();
   };
   initializeEnemies = () => {
-    this.enemies = []
+    this.enemies = [];
     for (let i = 0; i < this.settings.enemyAmount; i++) {
       this.enemies.push(
         new Enemy(
