@@ -1,28 +1,35 @@
-class RAF {
+import Observer from './Observer'
+
+export class RAF extends Observer {
   constructor() {
-    this.bind();
-    this.callbacks = [];
-    this.render();
+    super()
+    this.start = this.start.bind(this);
+    this.pause = this.pause.bind(this);
+    this.tick = this.tick.bind(this);
   }
 
-  subscribe = (name, callback) => {
-    this.callbacks.push({
-      name: name,
-      callback: callback,
-    });
-  }
+  emit = this._emit('tick')
+  subscribe = this._on('tick')
+  unsubscribe = this._cancel('tick')
 
-  unsubscribe = (name) => {
-    this.callbacks.forEach((item, i) => {
-      if (item.name == name) this.callbacks.splice(i, i + 1);
-    });
+  start = () => {
+    this.time = window.performance.now();
+    this.oldTime = this.time;
+    this.isPaused = false;
+    this.tick(this.time)
   }
+  pause = () => {
+    this.isPaused = true;
+  }
+  tick = (now) => {
+    this.time = now;
 
-  render = () => {
-    requestAnimationFrame(this.render);
-    this.callbacks.forEach((item) => {
-      item.callback()
-    });
+    if (!this.isPaused) {
+      this.delta = (now - this.oldTime) / 1000;
+      this.oldTime = now;
+      this.emit({ delta: this.delta, now })
+      requestAnimationFrame(this.tick);
+    }
   }
 }
 

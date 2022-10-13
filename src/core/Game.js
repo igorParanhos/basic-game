@@ -6,38 +6,8 @@ import { Level1 } from '../levels/Level1';
 import { Level2 } from '../levels/Level2';
 import { Renderer } from './Renderer';
 import { GameInfoProvider } from './gameInfo';
-
-const $result = document.querySelector('#result');
-
-
-export class UiController {
-  constructor() { }
-
-  setResult = (status) => {
-    let message, className;
-    switch (status) {
-      case 'fail':
-        className = status;
-        message = 'YOU FAILED!';
-        break;
-      case 'success':
-        className = status;
-        message = 'YOU WON!';
-        break;
-      case 'next-level':
-        className = 'info';
-        message = 'NEXT LEVEL!';
-        break;
-    }
-    $result.classList.remove('animate', 'info', 'success', 'fail');
-    $result.classList.add('animate', className);
-    $result.children[0].innerHTML = message;
-  };
-  setLevel = (level) => {
-    const $level = document.querySelector('#level');
-    $level.innerHTML = `Level: ${level}`;
-  };
-}
+import UiController from './UiController';
+import RAF from '../utils/RAF'
 
 export class Game {
   constructor({ element }) {
@@ -45,10 +15,12 @@ export class Game {
     this.renderer = new Renderer(element, this.gameInfoProvider);
     this._animationFrame = null;
     this.levels = [Level0, Level1, Level2];
-    this.uiController = new UiController();
+    this.uiController = UiController;
   }
   initialize = () => {
     this.setLevel(0);
+    RAF.subscribe(this.tick)
+
   };
   setLevel = (levelIndex) => {
     this.currentLevel = levelIndex;
@@ -79,25 +51,24 @@ export class Game {
   };
 
   startRenderer = () => {
-    this._animationFrame = requestAnimationFrame(this.tick);
+    RAF.start()
   };
   stopRenderer = () => {
-    cancelAnimationFrame(this._animationFrame);
+    RAF.pause()
   };
   tick = () => {
     this.renderer.renderObjects();
     this.checkCollision();
-
-    if (this.gameInfoProvider.status.value == 'playing') this._animationFrame = requestAnimationFrame(this.tick);
   };
 
   handlePlayerEnemyCollision = () => {
-    this.gameInfoProvider.status.stop();
+    this.stop()
     this.uiController.setResult('fail');
     this.resetLevel();
   };
   handlePlayerPrizeCollision = () => {
-    this.gameInfoProvider.status.stop();
+    this.stop()
+    this.stopRenderer()
     if (this.currentLevel === this.levels.length - 1) this.uiController.setResult('success');
     else this.uiController.setResult('next-level');
     this.nextLevel();

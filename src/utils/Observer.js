@@ -1,18 +1,22 @@
 export default class Observer {
-  listeners = {};
+  _listeners = {};
 
   _pushListener = (type, listener) => {
-    if (this.listeners[type]) this.listeners[type].push(listener);
-    else this.listeners[type] = [listener];
+    if (this._listeners[type]) this._listeners[type].push(listener);
+    else this._listeners[type] = [listener];
   };
 
   _runAll = (type, state) => {
-    const listeners = this.listeners[type];
-    if (!listeners) return;
-    return listeners.forEach((listener) => listener(state));
+    const _listeners = this._listeners[type];
+    if (!_listeners) return;
+    return _listeners.forEach((listener) => listener(state));
   };
 
   _on = (event) => (listener) => {
+    if (typeof listener !== 'function') {
+      console.warn('Listener is not a function')
+      return
+    }
     this._pushListener(event, listener);
   };
 
@@ -21,10 +25,10 @@ export default class Observer {
   };
 
   _cancel = (event) => (listener) => {
-    this.listeners[event] = this.listeners[event].filter((fn) => fn !== listener);
+    this._listeners[event] = this._listeners[event].filter((fn) => fn !== listener);
   };
 
   _cancelAll = (event) => {
-    this.listeners[event] = {};
+    this._listeners[event] = {};
   };
 }
