@@ -6,12 +6,12 @@ export class Level2 extends Level {
     super();
     this.settings = {
       ...this.settings,
-      enemyAmount: 30,
+      enemyAmount: 20,
       playerSpeed: 3,
       enemyMovementSettings: {
-        speed: 3,
-        rotation: 0.2,
-        randomOrientation: true,
+        speed: 1.5,
+        rotation: 8,
+        randomOrientation: false,
       },
     };
     this.enemyMovementStrategy = EnemyCircularStrategy;

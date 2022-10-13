@@ -1,24 +1,33 @@
 import { Enemy } from '../objects/Enemy';
 import { Player } from '../objects/Player';
 import { Prize } from '../objects/Prize';
-import { Level0 } from '../levels/Level0';
-import { Level1 } from '../levels/Level1';
-import { Level2 } from '../levels/Level2';
+import { levels } from '../levels';
 import { Renderer } from './Renderer';
 import { GameInfoProvider } from './gameInfo';
 import UiController from './UiController';
 import RAF from '../utils/RAF'
+
+const parseSearchParams = (search) => {
+  return search.replace('?', '').split('&').reduce((acc, item) => {
+    const [key, value] = item.split('=')
+    acc[key] = value
+    return acc
+  }, {}) || {}
+}
 
 export class Game {
   constructor({ element }) {
     this.gameInfoProvider = new GameInfoProvider();
     this.renderer = new Renderer(element, this.gameInfoProvider);
     this._animationFrame = null;
-    this.levels = [Level0, Level1, Level2];
+    this.levels = levels;
     this.uiController = UiController;
   }
   initialize = () => {
-    this.setLevel(0);
+    const search = parseSearchParams(window.location.search)
+    if (search.level)
+      this.setLevel(parseInt(search.level))
+    else this.setLevel(0);
     RAF.subscribe(this.tick)
 
   };

@@ -6,7 +6,7 @@ export class Level0 extends Level {
     super();
     this.settings = {
       ...this.settings,
-      enemyAmount: 20,
+      enemyAmount: 15,
       playerSpeed: 3,
       enemyMovementSettings: {
         speed: 2,

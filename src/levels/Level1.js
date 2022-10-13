@@ -1,4 +1,4 @@
-import { EnemyCircularStrategy } from '../movement/EnemyCircularStrategy';
+import { EnemyLinearStrategy } from '../movement/EnemyLinearStrategy';
 import { Level } from '../base/Level';
 
 export class Level1 extends Level {
@@ -6,14 +6,13 @@ export class Level1 extends Level {
     super();
     this.settings = {
       ...this.settings,
-      enemyAmount: 25,
-      playerSpeed: 3,
+      enemyAmount: 10,
+      playerSpeed: 2,
       enemyMovementSettings: {
-        speed: 2,
-        rotation: 0.1,
-        randomOrientation: false,
+        speed: 3,
+        bounce: true,
       },
     };
-    this.enemyMovementStrategy = EnemyCircularStrategy;
+    this.enemyMovementStrategy = EnemyLinearStrategy;
   }
 }
