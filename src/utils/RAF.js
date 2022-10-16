@@ -13,8 +13,6 @@ export class RAF extends Observer {
   unsubscribe = this._cancel('tick')
 
   start = () => {
-    this.time = window.performance.now();
-    this.oldTime = this.time;
     this.isPaused = false;
     this.tick(this.time)
   }
@@ -22,12 +20,13 @@ export class RAF extends Observer {
     this.isPaused = true;
   }
   tick = (now) => {
-    this.time = now;
+    let delta = 0;
+    if (this.time)
+      delta = now - this.time
+    this.time = now
 
     if (!this.isPaused) {
-      this.delta = (now - this.oldTime) / 1000;
-      this.oldTime = now;
-      this.emit({ delta: this.delta, now })
+      this.emit({ delta, now })
       requestAnimationFrame(this.tick);
     }
   }
