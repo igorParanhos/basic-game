@@ -3,7 +3,7 @@ import { Player } from '../objects/Player';
 import { Prize } from '../objects/Prize';
 import { levels } from '../levels';
 import { Renderer } from './Renderer';
-import { GameInfoProvider } from './gameInfo';
+import { GameInfoProvider } from './GameInfo';
 import UiController from './UiController';
 import RAF from '../utils/RAF'
 
@@ -65,7 +65,8 @@ export class Game {
   stopRenderer = () => {
     RAF.pause()
   };
-  tick = () => {
+  tick = ({ delta }) => {
+    console.log(delta);
     this.renderer.renderObjects();
     this.checkCollision();
   };
