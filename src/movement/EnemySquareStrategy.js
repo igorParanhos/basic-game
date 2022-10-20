@@ -1,5 +1,5 @@
 import { Movement } from "../base/Movement";
-import { degreesToRadians, radiansToDegrees } from "../utils/math";
+import { radiansToDegrees } from "../utils/math";
 
 export class EnemySquareStrategy extends Movement {
   constructor(settings) {
@@ -17,7 +17,6 @@ export class EnemySquareStrategy extends Movement {
   }
 
   _getNextPosition = (x, y) => {
-
     if (this.stepsTaken >= this.amplitude) {
       this.setDirection(radiansToDegrees(this.direction) + 90)
       this.stepsTaken = 0;

@@ -1,13 +1,5 @@
+import { Color } from '../base/Color';
 import { GameObject } from '../base/GameObject';
-import { hexToRgb, rgbToHex } from '../webgl/utils';
-
-// const genColor = () => {
-//   return rgbToHex(
-//     Math.floor(Math.random() * 255),
-//     Math.floor(Math.random() * 255),
-//     Math.floor(Math.random() * 255),
-//   )
-// }
 
 const genColor = () => {
   const colors = [
@@ -20,28 +12,23 @@ const genColor = () => {
 }
 
 const updateColor = (color, target) => {
-  let newColor = [0, 0, 0].map((_, i) => {
-    let c = color[i]
-    const n = target[i]
-    return c > n
-      ? c - 1
-      : c < n
-        ? c + 1
-        : c
-  })
-  return rgbToHex(...newColor)
+  const [r, g, b] = color.rgb
+  const [r2, g2, b2] = target.rgb
+
+  color.r = r > r2 ? r - 1 : r < r2 ? r + 1 : r
+  color.g = g > g2 ? g - 1 : g < g2 ? g + 1 : g
+  color.b = b > b2 ? b - 1 : b < b2 ? b + 1 : b
 }
 
 export class Prize extends GameObject {
   constructor(x, y) {
-    super(x, y, '#1141ff');
+    super(x, y, new Color('#1141ff'));
     this._targetColor = this.color;
   }
   _tick = () => {
-    if (this.color === this._targetColor) {
-      this._targetColor = genColor();
-    }
-    const c = updateColor(hexToRgb(this.color), hexToRgb(this._targetColor));
-    this.color = c
+    if (this.color === this._targetColor)
+      this._targetColor = new Color(genColor());
+
+    updateColor(this.color, this._targetColor);
   }
 }

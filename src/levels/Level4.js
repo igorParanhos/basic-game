@@ -10,13 +10,14 @@ export class Level4 extends Level {
       playerSpeed: 3,
       enemyMovementSettings: {
         speed: 1.5,
-        squareAmplitude: 60,
+        squareAmplitude: 100,
         randomizeAmplitude: true,
         amplitudeVariation: 20,
         randomOrientation: true,
+        variation: 40,
         bounce: true,
         accelerateOnBounce: true,
-        maxAcceleration: 3
+        maxAcceleration: 10
       },
     };
     this.enemyMovementStrategy = EnemySquareStrategy;
