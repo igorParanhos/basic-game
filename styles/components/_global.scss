@@ -1,6 +1,37 @@
 * {
   box-sizing: border-box;
+
+  font-family: 'Silkscreen';
 }
+
+.bungee-shade {
+  font-family: 'Bungee Shade';
+}
+.codystar {
+  font-family: 'Codystar';
+}
+.montserrat {
+  font-family: 'Montserrat';
+}
+.nabla {
+  font-family: 'Nabla';
+}
+.nixie-one {
+  font-family: 'Nixie One';
+}
+.press-start-2-p {
+  font-family: 'Press Start 2P';
+}
+.rampart-one {
+  font-family: 'Rampart One';
+}
+.rubik-iso {
+  font-family: 'Rubik Iso';
+}
+.tourney {
+  font-family: 'Tourney';
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 
@@ -43,7 +74,7 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  animation: .3s fade-in ease-in-out;
+  animation: 0.3s fade-in ease-in-out;
 }
 
 .title {
