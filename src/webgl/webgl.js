@@ -70,7 +70,7 @@ export class WebGL {
     this._gl.bindBuffer(this._gl.ARRAY_BUFFER, this._positionBuffer);
     for (const object of objects) {
       const { x, y } = object.getPosition();
-      let color = hexToRgb(object.color)
+      let color = hexToRgb(object.color).map(v => v / 255)
       this._drawSquare(x, y, color);
     }
   }

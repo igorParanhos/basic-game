@@ -6,7 +6,6 @@ export class Movement {
     this._acceleration = 0
     this._accelerationTarget = 0
     this.setDirection(Math.random() * 360)
-
   }
 
   getNextPosition = (x, y) => {
