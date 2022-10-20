@@ -25,6 +25,11 @@ export class Movement {
           this._accelerationTarget = this.settings.maxAcceleration || 5
       }
     }
+    this.accelerate()
+
+    this.xDirection = Math.cos(this.direction) * this.getSteps()
+    this.yDirection = Math.sin(this.direction) * this.getSteps()
+
     return {
       x: nextX,
       y: nextY
@@ -38,14 +43,18 @@ export class Movement {
   getSteps = () => {
     if (this._getSteps) return this._getSteps()
     const steps = this.settings.speed + this._acceleration
-    this.accelerate()
+    if (this._acceleration !== 0)
+      console.log("steps:", steps)
+    console.log("normal steps:", steps)
     return steps
   }
   accelerate = () => {
+    if (this._acceleration !== 0)
+      console.log('accelerate', this._acceleration)
     if (this._accelerationTarget < this._acceleration)
-      this._acceleration -= 1
+      this._acceleration -= 0.5
     if (this._accelerationTarget > this._acceleration)
-      this._acceleration += 2
+      this._acceleration += 1
     if (this._accelerationTarget == this._acceleration) {
       this._accelerationTarget = 0
     }

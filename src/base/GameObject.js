@@ -1,5 +1,7 @@
+import { Color } from './Color';
+
 export class GameObject {
-  constructor(x = 0, y = 0, color = '#999999', movementStrategy = null, movementSettings = { speed: 2 }) {
+  constructor(x = 0, y = 0, color = new Color('#999999'), movementStrategy = null, movementSettings = { speed: 2 }) {
     this.x = x;
     this.y = y;
     this.color = color;

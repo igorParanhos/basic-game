@@ -1,6 +1,4 @@
-// import './styles/style.css';
-// import './styles/game.css';
-
+import { Color } from './src/base/Color';
 import { Game } from './src/core/Game';
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {

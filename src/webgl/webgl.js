@@ -1,4 +1,4 @@
-import { createShader, createProgram, setRectangle, hexToRgb } from './utils'
+import { createShader, createProgram, setRectangle } from './utils'
 import vsSource from './shaders/square.vert?raw'
 import fsSource from './shaders/square.frag?raw'
 
@@ -70,7 +70,7 @@ export class WebGL {
     this._gl.bindBuffer(this._gl.ARRAY_BUFFER, this._positionBuffer);
     for (const object of objects) {
       const { x, y } = object.getPosition();
-      let color = hexToRgb(object.color).map(v => v / 255)
+      let color = object.color.rgb.map(v => v / 255)
       this._drawSquare(x, y, color);
     }
   }
