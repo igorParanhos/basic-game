@@ -2,7 +2,7 @@ import { Enemy } from '../objects/Enemy';
 import { Player } from '../objects/Player';
 import { Prize } from '../objects/Prize';
 import { levels } from '../levels';
-import { Renderer } from './Renderer';
+import { WebGLRenderer } from './WebGLRenderer';
 import { GameInfoProvider } from './GameInfo';
 import UiController from './UiController';
 import RAF from '../utils/RAF'
@@ -18,7 +18,7 @@ const parseSearchParams = (search) => {
 export class Game {
   constructor({ element }) {
     this.gameInfoProvider = new GameInfoProvider();
-    this.renderer = new Renderer(element, this.gameInfoProvider);
+    this.renderer = new WebGLRenderer(element, this.gameInfoProvider);
     this._animationFrame = null;
     this.levels = levels;
     this.uiController = UiController;
@@ -66,7 +66,6 @@ export class Game {
     RAF.pause()
   };
   tick = ({ delta }) => {
-    console.log(delta);
     this.renderer.renderObjects();
     this.checkCollision();
   };

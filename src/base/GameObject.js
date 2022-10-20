@@ -15,6 +15,7 @@ export class GameObject {
     }
   };
   getPosition = () => {
+    this._tick && this._tick()
     if (this.movementStrategy) {
       const { x, y } = this.movementStrategy.getNextPosition(this.x, this.y);
       this.setPosition(x, y);
