@@ -1,12 +1,16 @@
+const isSmallDevice = !window.matchMedia("(min-width: 768px)").matches;
+
 export function addPressHoldEventButton(item, fn) {
   let timerID;
-
-  item.addEventListener('mousedown', pressingDown, false);
-  item.addEventListener('mouseup', notPressingDown, false);
-  item.addEventListener('mouseleave', notPressingDown, false);
-
-  item.addEventListener('touchstart', pressingDown, false);
-  item.addEventListener('touchend', notPressingDown, false);
+  if (isSmallDevice) {
+    item.addEventListener('touchstart', pressingDown, false);
+    item.addEventListener('touchend', notPressingDown, false);
+  }
+  else {
+    item.addEventListener('mousedown', pressingDown, false);
+    item.addEventListener('mouseup', notPressingDown, false);
+    item.addEventListener('mouseleave', notPressingDown, false);
+  }
 
   function pressingDown(e) {
     requestAnimationFrame(timer);
@@ -14,6 +18,7 @@ export function addPressHoldEventButton(item, fn) {
   }
 
   function notPressingDown(e) {
+    e.preventDefault();
     cancelAnimationFrame(timerID);
   }
 
@@ -23,12 +28,14 @@ export function addPressHoldEventButton(item, fn) {
   }
 
   function cancelEvents() {
-    item.removeEventListener('mousedown', pressingDown, false);
-    item.removeEventListener('mouseup', notPressingDown, false);
-    item.removeEventListener('mouseleave', notPressingDown, false);
-
-    item.removeEventListener('touchstart', pressingDown, false);
-    item.removeEventListener('touchend', notPressingDown, false);
+    if (isSmallDevice) {
+      item.removeEventListener('touchstart', pressingDown, false);
+      item.removeEventListener('touchend', notPressingDown, false);
+    } else {
+      item.removeEventListener('mousedown', pressingDown, false);
+      item.removeEventListener('mouseup', notPressingDown, false);
+      item.removeEventListener('mouseleave', notPressingDown, false);
+    }
   }
   return cancelEvents;
 }

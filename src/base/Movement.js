@@ -43,14 +43,9 @@ export class Movement {
   getSteps = () => {
     if (this._getSteps) return this._getSteps()
     const steps = this.settings.speed + this._acceleration
-    if (this._acceleration !== 0)
-      console.log("steps:", steps)
-    console.log("normal steps:", steps)
     return steps
   }
   accelerate = () => {
-    if (this._acceleration !== 0)
-      console.log('accelerate', this._acceleration)
     if (this._accelerationTarget < this._acceleration)
       this._acceleration -= 0.5
     if (this._accelerationTarget > this._acceleration)
