@@ -8,6 +8,7 @@ const genColor = () => {
     '#e3f20a',
     '#bd4ee6',
   ]
+  console.log('new Color')
   return colors[Math.round(Math.random() * colors.length - 1)]
 }
 
@@ -26,7 +27,7 @@ export class Prize extends GameObject {
     this._targetColor = this.color;
   }
   _tick = () => {
-    if (this.color === this._targetColor)
+    if (this.color.hex === this._targetColor.hex)
       this._targetColor = new Color(genColor());
 
     updateColor(this.color, this._targetColor);

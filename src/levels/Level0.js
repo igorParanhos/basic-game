@@ -1,4 +1,3 @@
-import { EnemyCircularStrategy } from '../movement/EnemyCircularStrategy';
 import { Level } from '../base/Level';
 
 export class Level0 extends Level {

@@ -16,28 +16,28 @@ export class Color {
     this.updateHex();
   }
   get r() {
-    this.#_r;
+    return this.#_r;
   }
   set g(v) {
     this.#_g = v;
     this.updateHex();
   }
   get g() {
-    this.#_g;
+    return this.#_g;
   }
   set b(v) {
     this.#_b = v;
     this.updateHex();
   }
   get b() {
-    this.#_b;
+    return this.#_b;
   }
   set a(v) {
     this.#_a = v;
     this.updateHex();
   }
   get a() {
-    this.#_a;
+    return this.#_a;
   }
   get rgb() {
     return [this.#_r, this.#_g, this.#_b];
@@ -47,7 +47,7 @@ export class Color {
     this.updateRgb();
   }
   get hex() {
-    this.#_hex;
+    return this.#_hex;
   }
 
   updateHex() {

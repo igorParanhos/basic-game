@@ -14,14 +14,16 @@ export class WebGL {
   }
 
   initializeShaders(vertexShaderSource, fragmentShaderSource) {
-    var vertexShader = createShader(this._gl, this._gl.VERTEX_SHADER, vertexShaderSource);
-    var fragmentShader = createShader(this._gl, this._gl.FRAGMENT_SHADER, fragmentShaderSource);
+    const vertexShader = createShader(this._gl, this._gl.VERTEX_SHADER, vertexShaderSource);
+    const fragmentShader = createShader(this._gl, this._gl.FRAGMENT_SHADER, fragmentShaderSource);
 
     this._program = createProgram(this._gl, vertexShader, fragmentShader);
   }
 
   initialize() {
-    var positionAttributeLocation = this._gl.getAttribLocation(this._program, "a_position");
+    this._gl.viewport(0, 0, this._gl.canvas.width, this._gl.canvas.height);
+
+    const positionAttributeLocation = this._gl.getAttribLocation(this._program, "a_position");
     this._resolutionUniformLocation = this._gl.getUniformLocation(this._program, "u_resolution");
 
     this._positionBuffer = this._gl.createBuffer();
@@ -33,11 +35,11 @@ export class WebGL {
     this._gl.enableVertexAttribArray(positionAttributeLocation);
     this._colorLocation = this._gl.getUniformLocation(this._program, "u_color");
 
-    var size = 2;                       // 2 components per iteration
-    var type = this._gl.FLOAT;          // the data is 32bit floats
-    var normalize = false;              // don't normalize the data
-    var stride = 0;                     // 0 = move forward size * sizeof(type) each iteration to get the next position
-    var offset = 0;                     // start at the beginning of the buffer
+    const size = 2;                       // 2 components per iteration
+    const type = this._gl.FLOAT;          // the data is 32bit floats
+    const normalize = false;              // don't normalize the data
+    const stride = 0;                     // 0 = move forward size * sizeof(type) each iteration to get the next position
+    const offset = 0;                     // start at the beginning of the buffer
     this._gl.vertexAttribPointer(
       positionAttributeLocation, size, type, normalize, stride, offset)
 
@@ -46,7 +48,6 @@ export class WebGL {
   }
 
   clear() {
-    this._gl.viewport(0, 0, this._gl.canvas.width, this._gl.canvas.height);
     this._gl.clearColor(0, 0, 0, 0);
     this._gl.clear(this._gl.COLOR_BUFFER_BIT | this._gl.DEPTH_BUFFER_BIT);
   }
@@ -57,9 +58,9 @@ export class WebGL {
     this._gl.uniform4f(this._colorLocation, ...color, 1);
 
     // Draw the rectangle.
-    var primitiveType = this._gl.TRIANGLES;
-    var offset = 0;
-    var count = 6;
+    const primitiveType = this._gl.TRIANGLES;
+    const offset = 0;
+    const count = 6;
     this._gl.drawArrays(primitiveType, offset, count);
   }
 
