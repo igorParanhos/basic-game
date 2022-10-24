@@ -8,7 +8,6 @@ const genColor = () => {
     '#e3f20a',
     '#bd4ee6',
   ]
-  console.log('new Color')
   return colors[Math.round(Math.random() * colors.length - 1)]
 }
 
