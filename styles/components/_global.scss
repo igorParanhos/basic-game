@@ -79,6 +79,14 @@ h1 {
 
 .title {
   color: #00ff7b;
+  background: linear-gradient(to right, rgb(35, 146, 220), rgb(11, 228, 178), rgb(215, 197, 61), rgb(35, 146, 220));
+  background-size: 70%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: 1s colors linear infinite;
+  background-position: 0px;
+  animation-fill-mode: forwards;
+  background-size: 1200px;
 }
 
 @media (prefers-color-scheme: light) {

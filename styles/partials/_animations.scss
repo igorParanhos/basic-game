@@ -34,3 +34,12 @@
     opacity: 0;
   }
 }
+
+@keyframes colors {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 1200px;
+  }
+}
