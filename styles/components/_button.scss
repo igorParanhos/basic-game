@@ -1,7 +1,6 @@
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -10,17 +9,41 @@ button {
   color: #fff;
   transition: border-color 0.25s;
 }
+
 button:focus,
 button:focus-visible {
   outline: none;
 }
+
 button:disabled {
   color: #999;
 }
 
+.game-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
 .start {
   border: 1px solid #17b25f;
+  background-color: #17b25f;
+  height: 64px;
+  width: 94px;
+  border-radius: 8px 8px 0 0;
+  // position: absolute;
+  // bottom: 0;
+  // left: 0;
 }
+
 .stop {
   border: 1px solid #b21764;
+  background-color: #b21764;
+  height: 64px;
+  width: 94px;
+  border-radius: 8px 8px 0 0;
 }

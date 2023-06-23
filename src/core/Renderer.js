@@ -14,10 +14,10 @@ export class CanvasRenderer {
     this.gameInfoProvider = gameInfoProvider;
   }
 
-  renderObjects = () => {
+  renderObjects = (delta) => {
     this.canvas.clear();
     for (let object of this.gameInfoProvider.currentLevel.getObjects()) {
-      const { x, y } = object.getPosition();
+      const { x, y } = object.getPosition(delta);
       this.canvas.square(x, y, 10, object.color);
     }
   };

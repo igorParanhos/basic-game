@@ -66,7 +66,7 @@ export class Game {
     RAF.pause()
   };
   tick = ({ delta }) => {
-    this.renderer.renderObjects();
+    this.renderer.renderObjects(delta);
     this.checkCollision();
   };
 

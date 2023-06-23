@@ -1,7 +1,16 @@
 #game {
-  border: 1px solid #fff;
   width: 100%;
   aspect-ratio: 1;
+  background-color: #1a1a1a;
+}
+
+.container-info {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: left;
+  background-color: #1a1a1a;
+  padding: 8px;
 }
 
 .controls {
@@ -28,9 +37,11 @@
 #up div {
   transform: rotate(-90deg);
 }
+
 #down div {
   transform: rotate(90deg);
 }
+
 #left div {
   transform: rotate(180deg);
 }
@@ -54,22 +65,28 @@
   left: 0;
   display: none;
 }
+
 .animate {
   display: flex;
 }
+
 .result.success {
   color: #00ff8c;
 }
+
 .result.fail {
   color: #ff0066;
 }
+
 .result.info {
   color: #0062ff;
 }
+
 .result span {
   display: block;
   opacity: 0;
 }
+
 .animate span {
   opacity: 1;
   animation: 0.5s appear ease-in-out;
