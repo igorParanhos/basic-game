@@ -18,6 +18,7 @@ export class Control {
     this.cancelListenerEvents();
   };
   up = () => {
+    console.log('up');
     this.gameObject.setPosition(this.gameObject.x, this.gameObject.y - this.speed);
   };
   down = () => {

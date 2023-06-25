@@ -1,12 +1,12 @@
-const isSmallDevice = !window.matchMedia("(min-width: 768px)").matches;
+const isSmallDevice = !window.matchMedia('(min-width: 768px)').matches;
+const isTouchDevice = 'ontouchstart' in window;
 
 export function addPressHoldEventButton(item, fn) {
   let timerID;
-  if (isSmallDevice) {
+  if (isSmallDevice && isTouchDevice) {
     item.addEventListener('touchstart', pressingDown, false);
     item.addEventListener('touchend', notPressingDown, false);
-  }
-  else {
+  } else {
     item.addEventListener('mousedown', pressingDown, false);
     item.addEventListener('mouseup', notPressingDown, false);
     item.addEventListener('mouseleave', notPressingDown, false);
@@ -28,7 +28,7 @@ export function addPressHoldEventButton(item, fn) {
   }
 
   function cancelEvents() {
-    if (isSmallDevice) {
+    if (isSmallDevice && isTouchDevice) {
       item.removeEventListener('touchstart', pressingDown, false);
       item.removeEventListener('touchend', notPressingDown, false);
     } else {
