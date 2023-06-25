@@ -7,7 +7,6 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   color: #fff;
-  transition: border-color 0.25s;
 }
 
 button:focus,
@@ -17,6 +16,7 @@ button:focus-visible {
 
 button:disabled {
   color: #999;
+  pointer-events: none;
 }
 
 .game-controls {
@@ -26,24 +26,34 @@ button:disabled {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
   gap: 18px;
+
+  button {
+    height: 64px;
+    width: 94px;
+    padding-top: 16px;
+    display: flex;
+    justify-content: center;
+    transition: all 0.2s ease-out;
+
+    background-position: 0px 50px;
+    background-size: 600px 1000px;
+    background-repeat: repeat-y;
+    border-radius: 8px 8px 0 0;
+
+    &:hover {
+      height: 82px;
+      background-position: 0 400px;
+    }
+  }
 }
 
 .start {
-  border: 1px solid #17b25f;
-  background-color: #17b25f;
-  height: 64px;
-  width: 94px;
-  border-radius: 8px 8px 0 0;
-  // position: absolute;
-  // bottom: 0;
-  // left: 0;
+  background: linear-gradient(to bottom, rgb(60, 202, 136), rgb(38, 241, 207), rgb(60, 202, 136));
 }
 
 .stop {
-  border: 1px solid #b21764;
-  background-color: #b21764;
-  height: 64px;
-  width: 94px;
-  border-radius: 8px 8px 0 0;
+  background: linear-gradient(to bottom, rgb(201, 25, 69), rgb(230, 7, 81), rgb(201, 25, 69));
+
 }
