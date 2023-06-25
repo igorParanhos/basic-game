@@ -1,4 +1,4 @@
-import { hexToRgb, rgbToHex } from "../utils/color";
+import { hexToRgb, rgbToHex } from '../utils/color';
 
 export class Color {
   #_r = 0;
@@ -49,17 +49,15 @@ export class Color {
   get hex() {
     return this.#_hex;
   }
-
   updateHex() {
     this.#_hex = rgbToHex(this.#_r, this.#_g, this.#_b);
   }
   updateRgb() {
-    const rgb = hexToRgb(this.#_hex)
+    const rgb = hexToRgb(this.#_hex);
     this.#_r = rgb[0];
     this.#_g = rgb[1];
     this.#_b = rgb[2];
   }
-
   setColor = (color) => {
     if (Array.isArray(color)) {
       this.#_r = color[0];
@@ -67,9 +65,8 @@ export class Color {
       this.#_b = color[2];
       this.#_a = color.length === 4 ? color[3] : 1;
       this.updateHex();
-    }
-    else {
+    } else {
       this.hex = color;
     }
-  }
+  };
 }
