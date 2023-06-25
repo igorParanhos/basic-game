@@ -17,7 +17,7 @@ export class WebGLRenderer {
     this._webgl = new WebGL(this.gl)
   }
 
-  renderObjects = () => {
-    this._webgl.draw(this.gameInfoProvider.currentLevel.getObjects())
+  renderObjects = (delta) => {
+    this._webgl.draw(this.gameInfoProvider.currentLevel.getObjects(), delta)
   }
 }

@@ -64,13 +64,13 @@ export class WebGL {
     this._gl.drawArrays(primitiveType, offset, count);
   }
 
-  draw(objects) {
+  draw(objects, delta) {
     this.clear();
     this._gl.useProgram(this._program);
     this._gl.bindVertexArray(this._vao);
     this._gl.bindBuffer(this._gl.ARRAY_BUFFER, this._positionBuffer);
     for (const object of objects) {
-      const { x, y } = object.getPosition();
+      const { x, y } = object.getPosition(delta);
       let color = object.color.rgb.map(v => v / 255)
       this._drawSquare(x, y, color);
     }

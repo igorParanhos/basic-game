@@ -1,35 +1,6 @@
 * {
   box-sizing: border-box;
-
   font-family: 'Silkscreen';
-}
-
-.bungee-shade {
-  font-family: 'Bungee Shade';
-}
-.codystar {
-  font-family: 'Codystar';
-}
-.montserrat {
-  font-family: 'Montserrat';
-}
-.nabla {
-  font-family: 'Nabla';
-}
-.nixie-one {
-  font-family: 'Nixie One';
-}
-.press-start-2p {
-  font-family: 'Press Start 2P';
-}
-.rampart-one {
-  font-family: 'Rampart One';
-}
-.rubik-iso {
-  font-family: 'Rubik Iso';
-}
-.tourney {
-  font-family: 'Tourney';
 }
 
 :root {
@@ -51,6 +22,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -58,7 +30,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   height: 100vh;
 }
@@ -72,21 +43,31 @@ h1 {
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  // padding: 2rem;
   text-align: center;
   animation: 0.3s fade-in ease-in-out;
 }
 
 .title {
   color: #00ff7b;
-  background: linear-gradient(to right, rgb(35, 146, 220), rgb(11, 228, 178), rgb(215, 197, 61), rgb(35, 146, 220));
-  background-size: 70%;
+  background: linear-gradient(to right, rgb(35, 146, 220), rgb(11, 228, 178), rgb(56, 197, 138), rgb(35, 146, 220));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: 1s colors linear infinite;
+  animation: 10s colors linear infinite;
   background-position: 0px;
   animation-fill-mode: forwards;
-  background-size: 1200px;
+  background-size: 1800px;
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  padding-top: 48px;
+  margin: 0;
+  font-size: 54px;
+
+  @media (max-height: 680px) {
+    font-size: 52px;
+    padding-top: 6px;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -94,9 +75,11 @@ h1 {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }

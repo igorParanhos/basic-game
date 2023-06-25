@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
-    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#747bff" />
-    <meta name="msapplication-TileColor" content="#747bff" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-    <meta name="theme-color" content="#747bff" />
-    <link rel="manifest" href="/config/manifest.json" />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#747bff" />
+  <meta name="msapplication-TileColor" content="#747bff" />
 
-    <meta name="description" content="Just a basic game" />
-    <meta name="author" content="Igor Paranhos" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#747bff" />
+  <link rel="manifest" href="/config/manifest.json" />
 
-    <link rel="stylesheet" href="./styles/index.scss" />
+  <meta name="description" content="Just a basic game" />
+  <meta name="author" content="Igor Paranhos" />
 
-    <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Codystar:wght@300;400&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nabla&family=Nixie+One&family=Press+Start+2P&family=Rampart+One&family=Rubik+Iso&family=Silkscreen:wght@400;700&family=Tourney:wght@300;500&display=swap"
-      rel="stylesheet"
-    />
-    <title>UBazeek</title>
-  </head>
-  <body>
-    <div id="app">
-      <h1 class="title">UBazeek</h1>
-      <div class="info">
-        <div id="level" class="level"></div>
-      </div>
+  <link rel="stylesheet" href="./styles/index.scss" />
 
-      <div class="game-container">
-        <canvas id="game"></canvas>
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Codystar:wght@300;400&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nabla&family=Nixie+One&family=Press+Start+2P&family=Rampart+One&family=Rubik+Iso&family=Silkscreen:wght@400;700&family=Tourney:wght@300;500&display=swap"
+    rel="stylesheet" />
+  <title>UBazeek</title>
+</head>
 
-        <div id="result" class="result">
-          <span></span>
-        </div>
-      </div>
+<body>
+  <div id="app">
+    <h1 class="title">UBazeek</h1>
+    <div class="container-info">
+      <div id="level" class="level"></div>
+    </div>
 
-      <div class="controls">
-        <button class="control" id="left"><div>➤</div></button>
-        <button class="control" id="up"><div>➤</div></button>
-        <button class="control" id="down"><div>➤</div></button>
-        <button class="control" id="right"><div>➤</div></button>
-      </div>
+    <div class="game-container">
+      <canvas id="game"></canvas>
 
-      <div>
-        <button class="start" id="start">START</button>
-        <button class="stop" id="stop" disabled>STOP</button>
+      <div id="result" class="result">
+        <span></span>
       </div>
     </div>
-    <script type="module" src="/main.js"></script>
-  </body>
+
+    <div class="controls">
+      <button class="control" id="left">
+        <img src="/images/arrow-right.svg" alt="arrow" />
+      </button>
+      <button class="control" id="up">
+        <img src="/images/arrow-right.svg" alt="arrow" />
+      </button>
+      <button class="control" id="down">
+        <img src="/images/arrow-right.svg" alt="arrow" />
+      </button>
+      <button class="control" id="right">
+        <img src="/images/arrow-right.svg" alt="arrow" />
+      </button>
+    </div>
+
+    <div class="game-controls">
+      <button class="start" id="start">START</button>
+      <button class="stop" id="stop" disabled>STOP</button>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

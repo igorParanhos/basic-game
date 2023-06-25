@@ -23,16 +23,6 @@ const main = () => {
   const game = new Game({ element: $canvas });
 
   game.initialize();
-  game.gameInfoProvider.status.onStart(() => {
-    $start.disabled = true;
-    $stop.disabled = false;
-    $result.classList.remove('fail', 'success', 'animate');
-  });
-
-  game.gameInfoProvider.status.onStop(() => {
-    $start.disabled = false;
-    $stop.disabled = true;
-  });
 
   $start.addEventListener('click', game.start);
   $stop.addEventListener('click', game.stop);

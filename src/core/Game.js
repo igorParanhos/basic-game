@@ -4,16 +4,22 @@ import { Prize } from '../objects/Prize';
 import { levels } from '../levels';
 import { WebGLRenderer } from './WebGLRenderer';
 import { GameInfoProvider } from './GameInfo';
-import UiController from './UiController';
-import RAF from '../utils/RAF'
+import UIState from './ui/state';
+import RAF from '../utils/RAF';
+import { GAME_STATUS, STATUS } from './ui/constants';
 
 const parseSearchParams = (search) => {
-  return search.replace('?', '').split('&').reduce((acc, item) => {
-    const [key, value] = item.split('=')
-    acc[key] = value
-    return acc
-  }, {}) || {}
-}
+  return (
+    search
+      .replace('?', '')
+      .split('&')
+      .reduce((acc, item) => {
+        const [key, value] = item.split('=');
+        acc[key] = value;
+        return acc;
+      }, {}) || {}
+  );
+};
 
 export class Game {
   constructor({ element }) {
@@ -21,20 +27,18 @@ export class Game {
     this.renderer = new WebGLRenderer(element, this.gameInfoProvider);
     this._animationFrame = null;
     this.levels = levels;
-    this.uiController = UiController;
+    this.uiState = UIState;
   }
   initialize = () => {
-    const search = parseSearchParams(window.location.search)
-    if (search.level)
-      this.setLevel(parseInt(search.level))
+    const search = parseSearchParams(window.location.search);
+    if (search.level) this.setLevel(parseInt(search.level));
     else this.setLevel(0);
-    RAF.subscribe(this.tick)
-
+    RAF.subscribe(this.tick);
   };
   setLevel = (levelIndex) => {
     this.currentLevel = levelIndex;
     this.gameInfoProvider.currentLevel = new this.levels[this.currentLevel]();
-    this.uiController.setLevel(levelIndex);
+    this.uiState.setLevel(levelIndex);
   };
   nextLevel = () => {
     if (this.currentLevel == this.levels.length - 1) {
@@ -47,6 +51,8 @@ export class Game {
     this.setLevel(0);
   };
   start = () => {
+    this.uiState.setResult(null);
+    this.uiState.setGameStatus(GAME_STATUS.PLAYING);
     this.gameInfoProvider.currentLevel.initialize();
     this.gameInfoProvider.currentLevel.start();
     this.gameInfoProvider.status.start();
@@ -54,32 +60,33 @@ export class Game {
   };
 
   stop = () => {
+    this.uiState.setGameStatus(GAME_STATUS.STOPPED);
     this.gameInfoProvider.currentLevel.stop();
     this.gameInfoProvider.status.stop();
     this.stopRenderer();
   };
 
   startRenderer = () => {
-    RAF.start()
+    RAF.start();
   };
   stopRenderer = () => {
-    RAF.pause()
+    RAF.pause();
   };
   tick = ({ delta }) => {
-    this.renderer.renderObjects();
+    this.renderer.renderObjects(delta);
     this.checkCollision();
   };
 
   handlePlayerEnemyCollision = () => {
-    this.stop()
-    this.uiController.setResult('fail');
+    this.stop();
+    this.uiState.setResult(STATUS.FAIL);
     this.resetLevel();
   };
   handlePlayerPrizeCollision = () => {
-    this.stop()
-    this.stopRenderer()
-    if (this.currentLevel === this.levels.length - 1) this.uiController.setResult('success');
-    else this.uiController.setResult('next-level');
+    this.stop();
+    this.stopRenderer();
+    if (this.currentLevel === this.levels.length - 1) this.uiState.setResult(STATUS.SUCCESS);
+    else this.uiState.setResult(STATUS.NEXT_LEVEL);
     this.nextLevel();
   };
   checkCollision = () => {
