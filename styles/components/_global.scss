@@ -58,10 +58,16 @@ h1 {
   animation-fill-mode: forwards;
   background-size: 1800px;
   width: 100%;
-  text-align: left;
-  padding: 24px 0;
+  text-align: center;
+  padding: 12px 0;
+  padding-top: 48px;
   margin: 0;
-  font-size: 58px;
+  font-size: 54px;
+
+  @media (max-height: 680px) {
+    font-size: 52px;
+    padding-top: 6px;
+  }
 }
 
 @media (prefers-color-scheme: light) {
