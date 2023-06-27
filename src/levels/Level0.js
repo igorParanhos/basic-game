@@ -6,10 +6,9 @@ export class Level0 extends Level {
     this.settings = {
       ...this.settings,
       enemyAmount: 15,
-      playerSpeed: 3,
+      playerSpeed: 180,
       enemyMovementSettings: {
-        speed: 2,
-        rotation: 0.1,
+        speed: 150,
         randomOrientation: false,
       },
     };

@@ -17,17 +17,17 @@ export class Control {
   stop = () => {
     this.cancelListenerEvents();
   };
-  up = () => {
-    this.gameObject.setPosition(this.gameObject.x, this.gameObject.y - this.speed);
+  up = (delta) => {
+    this.gameObject.setPosition(this.gameObject.x, this.gameObject.y - this.speed * delta);
   };
-  down = () => {
-    this.gameObject.setPosition(this.gameObject.x, this.gameObject.y + this.speed);
+  down = (delta) => {
+    this.gameObject.setPosition(this.gameObject.x, this.gameObject.y + this.speed * delta);
   };
-  left = () => {
-    this.gameObject.setPosition(this.gameObject.x - this.speed, this.gameObject.y);
+  left = (delta) => {
+    this.gameObject.setPosition(this.gameObject.x - this.speed * delta, this.gameObject.y);
   };
-  right = () => {
-    this.gameObject.setPosition(this.gameObject.x + this.speed, this.gameObject.y);
+  right = (delta) => {
+    this.gameObject.setPosition(this.gameObject.x + this.speed * delta, this.gameObject.y);
   };
   addListeners = () => {
     this._cancellationTokens.push(addPressHoldEventKeypress(document, this.handleInput));
@@ -41,20 +41,20 @@ export class Control {
       cancelEvent();
     }
   };
-  handleInput = (e) => {
+  handleInput = (e, delta) => {
     const key = String(e.key).toLowerCase();
     switch (key) {
       case 'w':
-        this.up();
+        this.up(delta);
         break;
       case 'a':
-        this.left();
+        this.left(delta);
         break;
       case 's':
-        this.down();
+        this.down(delta);
         break;
       case 'd':
-        this.right();
+        this.right(delta);
         break;
     }
   };

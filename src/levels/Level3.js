@@ -1,4 +1,3 @@
-
 import { EnemyCircularStrategy } from '../movement/EnemyCircularStrategy';
 import { Level } from '../base/Level';
 
@@ -8,9 +7,9 @@ export class Level3 extends Level {
     this.settings = {
       ...this.settings,
       enemyAmount: 25,
-      playerSpeed: 3,
+      playerSpeed: 180,
       enemyMovementSettings: {
-        speed: 2,
+        speed: 200,
         rotation: 5,
         accelerateOnBounce: true,
         randomOrientation: true,

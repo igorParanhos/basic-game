@@ -1,3 +1,5 @@
+import RAF from './RAF';
+
 const isSmallDevice = !window.matchMedia('(min-width: 768px)').matches;
 const isTouchDevice = 'ontouchstart' in window;
 
@@ -12,23 +14,22 @@ export function addPressHoldEventButton(item, fn) {
     item.addEventListener('mouseleave', notPressingDown, false);
   }
 
+  function timer({ delta }) {
+    fn(delta / 1000);
+  }
+
   function pressingDown(e) {
-    requestAnimationFrame(timer);
     e.preventDefault();
+    RAF.subscribe(timer);
   }
 
   function notPressingDown(e) {
     e.preventDefault();
-    cancelAnimationFrame(timerID);
-  }
-
-  function timer() {
-    fn();
-    timerID = requestAnimationFrame(timer);
+    RAF.unsubscribe(timer);
   }
 
   function cancelEvents() {
-    cancelAnimationFrame(timerID);
+    RAF.unsubscribe(timerID);
     if (isSmallDevice && isTouchDevice) {
       item.removeEventListener('touchstart', pressingDown, false);
       item.removeEventListener('touchend', notPressingDown, false);
@@ -42,7 +43,12 @@ export function addPressHoldEventButton(item, fn) {
 }
 
 export function addPressHoldEventKeypress(item, fn) {
-  let timerIDs = {};
+  let fns = {
+    w: ({ delta }) => fn({ key: 'w' }, delta / 1000),
+    a: ({ delta }) => fn({ key: 'a' }, delta / 1000),
+    s: ({ delta }) => fn({ key: 's' }, delta / 1000),
+    d: ({ delta }) => fn({ key: 'd' }, delta / 1000),
+  };
   let keysPressed = [];
   const allowedKeys = 'wasd';
 
@@ -55,25 +61,16 @@ export function addPressHoldEventKeypress(item, fn) {
     if (keysPressed.includes(e.key)) return;
 
     keysPressed.push(e.key);
-    requestAnimationFrame(timer(e));
+    RAF.subscribe(fns[e.key.toLowerCase()]);
   }
 
   function notPressingDown(e) {
     keysPressed = keysPressed.filter((k) => e.key !== k);
-    cancelAnimationFrame(timerIDs[e.key]);
-  }
-
-  function timer(e) {
-    return () => {
-      fn(e);
-      timerIDs[e.key] = requestAnimationFrame(timer(e));
-    };
+    RAF.unsubscribe(fns[e.key.toLowerCase()]);
   }
 
   function cancelEvents() {
-    for (let key in timerIDs) {
-      cancelAnimationFrame(timerIDs[key]);
-    }
+    keysPressed.forEach((k) => RAF.unsubscribe(fns[k.toLowerCase()]));
     item.removeEventListener('keydown', pressingDown, false);
     item.removeEventListener('keyup', notPressingDown, false);
   }

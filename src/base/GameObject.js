@@ -18,8 +18,8 @@ export class GameObject {
   };
   getPosition = (delta) => {
     this._tick && this._tick();
-    if (this.movementStrategy) {
-      const { x, y } = this.movementStrategy.getNextPosition(this.x, this.y);
+    if (this.movementStrategy && delta) {
+      const { x, y } = this.movementStrategy.getNextPosition(this.x, this.y, delta / 1000);
       this.setPosition(x, y);
     }
 
