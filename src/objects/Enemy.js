@@ -1,4 +1,4 @@
-import { Color } from '../base/Color';
+import { Color } from '../utils/Color';
 import { GameObject } from '../base/GameObject';
 
 export class Enemy extends GameObject {

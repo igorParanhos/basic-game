@@ -1,4 +1,4 @@
-import { Color } from './Color';
+import { Color } from '../utils/Color';
 
 export class GameObject {
   constructor(x = 0, y = 0, color = new Color('#999999'), movementStrategy = null, movementSettings = { speed: 2 }) {
