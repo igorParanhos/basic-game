@@ -18,7 +18,6 @@ export class Control {
     this.cancelListenerEvents();
   };
   up = () => {
-    console.log('up');
     this.gameObject.setPosition(this.gameObject.x, this.gameObject.y - this.speed);
   };
   down = () => {
@@ -43,7 +42,7 @@ export class Control {
     }
   };
   handleInput = (e) => {
-    const key = String(e.key).toLocaleLowerCase();
+    const key = String(e.key).toLowerCase();
     switch (key) {
       case 'w':
         this.up();

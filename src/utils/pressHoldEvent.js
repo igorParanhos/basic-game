@@ -28,6 +28,7 @@ export function addPressHoldEventButton(item, fn) {
   }
 
   function cancelEvents() {
+    cancelAnimationFrame(timerID);
     if (isSmallDevice && isTouchDevice) {
       item.removeEventListener('touchstart', pressingDown, false);
       item.removeEventListener('touchend', notPressingDown, false);
@@ -70,6 +71,9 @@ export function addPressHoldEventKeypress(item, fn) {
   }
 
   function cancelEvents() {
+    for (let key in timerIDs) {
+      cancelAnimationFrame(timerIDs[key]);
+    }
     item.removeEventListener('keydown', pressingDown, false);
     item.removeEventListener('keyup', notPressingDown, false);
   }
